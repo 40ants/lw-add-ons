@@ -75,5 +75,7 @@
                (:file "completions")
                (:file "systems")
                (:file "editor")
-               (:file "commands"))
-  :depends-on (:lw-doc))
+               (:file "commands")
+               (:file "doc"))
+  :depends-on ("lw-doc"
+               "40ants-doc"))

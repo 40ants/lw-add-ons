@@ -126,7 +126,8 @@ reasonably documented.
 
 (defun build-docs ()
   (unless (find-package :docs-builder)
-    (ql:quickload :docs-builder))
+    (ql:quickload :docs-builder)
+    (ql:quickload :cl-ppcre))
   
   (loop with target-dir = (asdf:system-relative-pathname :lw-add-ons "docs/")
         with build-path = (uiop:symbol-call :docs-builder :build
@@ -138,4 +139,14 @@ reasonably documented.
         do (copy-file file-name
                       target-file-name)
            (delete-file file-name)
-        finally (delete-directory build-path)))
+        finally (delete-directory build-path))
+
+  (let ((filename (asdf:system-relative-pathname :lw-add-ons "README.md")))
+    (alexandria:write-string-into-file
+     (cl-ppcre:regex-replace-all "\\((.*\.png)"
+                                 (alexandria:read-file-into-string filename)
+                                 "(docs/\\1")
+     filename
+     :if-exists :supersede))
+
+  (values))

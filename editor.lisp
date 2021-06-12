@@ -280,12 +280,13 @@ until *SEARCH-END* unless the value of this variable is NIL.")
          (call-next-advice point pattern *search-end*))
         (t (call-next-advice point pattern limit))))
 
+
 (defadvice (editor::query-replace-string region-only :around
-                                         :documentation "Performs
+            :documentation "Performs
 operation only up until *SEARCH-END* unless the value of this variable
 is NIL.  Also makes sure that all replacements can be undone with one
 undo command.")
-    (&rest rest &key (point (current-point)) &allow-other-keys)
+           (&rest rest &key (point (current-point)) &allow-other-keys)
   (let* ((current-mark (and (variable-value-if-bound 'editor::active-region-overlay
                                                      :buffer (current-buffer))
                             (current-mark nil t)))
@@ -299,18 +300,18 @@ undo command.")
                       (current-mark (current-point))
                       (t point))))
     (unwind-protect
-        (with-point ((%start start)
-                     (%end (or *search-end*
-                               (current-point))))
-          (unless *search-end*
-            (editor:buffer-end %end))
-          #+:editor-has-dont-undo
-          (recording-for-undo %start %end
-            (apply #'call-next-advice :point start rest))
-          ;; in new LispWorks versions it is no longer necessary to
-          ;; record for undo here
-          #-:editor-has-dont-undo          
-          (apply #'call-next-advice :point start rest))
+         (with-point ((%start start)
+                      (%end (or *search-end*
+                                (current-point))))
+           (unless *search-end*
+             (editor:buffer-end %end))
+           #+:editor-has-dont-undo
+           (recording-for-undo %start %end
+             (apply #'call-next-advice :point start rest))
+           ;; in new LispWorks versions it is no longer necessary to
+           ;; record for undo here
+           #-:editor-has-dont-undo          
+           (apply #'call-next-advice :point start rest))
       (when *search-end*
         (delete-point *search-end*)))))
 
@@ -446,28 +447,72 @@ that is named by this abbreviation."
             do (return long))
       (loop for (nil . long) in *listener-shortcuts*
             when (starts-with-p long abbrev)
-            do (return long))))
+              do (return long))))
+
+
+(40ants-doc:defsection @listener-shortcuts (:title "Listener shortcuts"
+                                            :ignore-words ("F1"))
+  "
+Similar to SLIME's slime-handle-repl-shortcut you can press `,`
+(comma, for `Maybe Invoke Listener Shortcut`) in the listener and then
+choose from a couple of shortcuts (see *LISTENER-SHORTCUTS*) to perform
+administrative tasks like loading a system via ASDF or changing the current directory.
+
+Type `F1` when prompted for a shortcut to see a list of what's available.
+
+Currently there are shortcuts for:
+
+- `Load ASDF System` (l),
+- `Test ASDF System` (t),
+- `Compile ASDF System` (c),
+- `Change Package` (p),
+- `Change Directory` (cd),
+- `Show Directory` (pwd), and
+- `Quit` (q or s)
+
+See the documentation strings of these commands for details.
+
+If Quicklisp is used, the first is changed to
+
+- `Quickload Library` (l),
+
+and loading with ASDF is changed to:
+
+- `Load ASDF System` (a),
+
+If you don't like this change and want the old behavior while using
+Quicklisp simply switch *USE-QUICKLISP-FOR-SHORTCUT-L* to NIL.
+
+"
+  (:|Maybe Invoke Listener Shortcut| command)
+  (:|Change Package| command)
+  (:|Change Directory| command)
+  (:|Show Directory| command)
+  (:|Quit| command)
+  (*listener-shortcuts* variable)
+  (*use-quicklisp-for-shortcut-l* variable))
+
 
 (defun prompt-for-listener-shortcut ()
   "Prompts for a listener shortcut."
   (let ((input
-         (editor::parse-for-something
-          :prompt (format nil "Shortcut [~{~A~^,~}] or Command: "
-                          (sort (mapcar #'car *listener-shortcuts*) #'string-lessp))
-          :must-exist t
-          :help (format nil "Type the name or abbreviation of a listener shortcut:~%~%~{~A: ~A~%~}"
-                        (loop for (short . long) in *listener-shortcuts*
-                              collect short
-                              collect long))
-          :default ""
-          :default-string ""
-          :verify-func (lambda (string parse-inf)
-                         (declare (ignore parse-inf))
-                         (and (find-full-name string)
-                              string))
-          :type :string
-          :default-in-prompt nil
-          :complete-func 'complete-shortcut)))
+          (editor::parse-for-something
+           :prompt (format nil "Shortcut [~{~A~^,~}] or Command: "
+                           (sort (mapcar #'car *listener-shortcuts*) #'string-lessp))
+           :must-exist t
+           :help (format nil "Type the name or abbreviation of a listener shortcut:~%~%~{~A: ~A~%~}"
+                         (loop for (short . long) in *listener-shortcuts*
+                               collect short
+                               collect long))
+           :default ""
+           :default-string ""
+           :verify-func (lambda (string parse-inf)
+                          (declare (ignore parse-inf))
+                          (and (find-full-name string)
+                               string))
+           :type :string
+           :default-in-prompt nil
+           :complete-func 'complete-shortcut)))
     (find-full-name input)))
 
 (eval-when (:compile-toplevel :load-toplevel :execute)

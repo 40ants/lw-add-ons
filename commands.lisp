@@ -50,11 +50,26 @@ area after inserting a space."
   (self-insert-command p #\Space)
   (show-arglist))
 
+
+(40ants-doc:defsection @transient-mode (:title "Transient mark mode"
+                                        :ignore-words ("C-SPC"
+                                                       "GNU"))
+  "
+The editor tries to emulate GNU Emacs' transient mark mode if you bind
+the command `Set Mark And Highlight` to `C-SPC` and/or `C-@`.
+
+This results in the marked region always being highlighted.
+
+TODO: Check if this command needed in LispWorks 7.1 seems standard `Set Mark` command works well.
+"
+  (:|Set Mark And Highlight| command))
+
+
 (defcommand "Set Mark And Highlight" (p)
-      "Sets the mark and turns on highlighting.  To be used as a
+  "Sets the mark and turns on highlighting.  To be used as a
 replacement for the normal \"Set Mark\" command if you want
 something similar to `transient mark mode.'"
-      "Sets the mark and turns on highlighting."
+  "Sets the mark and turns on highlighting."
   ;; from Barry Wilkes
   (set-mark-command p)
   (hl-on-command p))
@@ -147,13 +162,45 @@ function."
               ((find char-before '(#\Space #\Tab))
                (show-arglist)))))))
 
+
+(40ants-doc:defsection @documentation (:title "Online documentation"
+                                       :ignore-words ("F5"
+                                                      "AMOP"))
+  "
+The editor command `Meta Documentation` (bound to F5 in the sample init file)
+tries to find HTML documentation for the symbol at point and immediately
+shows it using the default web browser. This applies to the
+[HyperSpec](http://www.lispworks.com/documentation/HyperSpec/Front/index.htm),
+the [LispWorks reference manuals](http://www.lispworks.com/documentation/),
+the [MOP](http://www.lisp.org/mop/index.html) (see *MOP-PAGE*), and some other
+useful stuff, e.g. format strings like [`~*`](http://www.lispworks.com/documentation/HyperSpec/Body/22_cga.htm),
+reader macros like [`#x`](http://www.lispworks.com/documentation/HyperSpec/Body/02_dhi.htm),
+and loop clauses like [`loop:until`](http://www.lispworks.com/documentation/HyperSpec/Body/06_ad.htm).
+
+Finally, HTML documentation for libraries like [`CL-PPCRE`](http://weitz.de/cl-ppcre/)
+or LW-ADD-ONS itself that have [`Hyperdoc`](http://common-lisp.net/project/hyperdoc/)
+support will also be found.
+
+**TODO:** Check how Hyperdoc works and maybe to support it in 40ANTS-DOC.
+
+If the command is invoked with a prefix argument you are prompted for
+a symbol and completion is available.
+
+Note that this command is similar although not identical to the
+undocumented LispWorks command `Function Documentation`.
+
+"
+  (:|Meta Documentation| command)
+  (*mop-page* variable))
+
+
 (defcommand "Meta Documentation" (p)
-     "Finds and displays documentation for the given symbol if it is
+  "Finds and displays documentation for the given symbol if it is
 supported by Hyperdoc or can be found in one of the online manuals
 \(CLHS, LW, MOP).  If point is on a symbol which is known to have
 documentation the page is immediately shown.  Otherwise, or with a
 prefix argument, the user is queried for the symbol."
-     "Shows CLHS/LW/MOP online documentation in browser."
+  "Shows CLHS/LW/MOP online documentation in browser."
   (let* ((symbol (and (not p)
                       (symbol-at-point :previous t)))
          (string (and symbol
@@ -180,6 +227,29 @@ prefix argument, the user is queried for the symbol."
               uri (doc-entry string))))
     (when (and uri (plusp (length uri)))
       (browse-anchored-uri uri))))
+
+
+(40ants-doc:defsection @search-and-replace (:title "Search and replace")
+  "
+The editor commands to find and replace strings are modified in such a way
+that they only operate on the marked region if there is one.
+Also, the effects of a [`Replace...`](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w-69.htm#marker-885310)
+command can be undone with a single [`Undo`](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w-54.htm#marker-884739)
+command. (The latter feature comes for free with LispWorks 5.1 and higher.)
+
+In LispWorks 5.0 and earlier, the editor command
+[`Continue Tags Search`](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w-96.htm#marker-928756)
+and all commands (like, say, [`Edit Callers`](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w-98.htm#marker-920148))
+that make it applicable (see the [LispWorks Editor User Guide](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w.htm))
+push the current position of point onto a definitions stack before they move to a new position. You can walk
+back through this \"history\" using the new editor command `Pop Definitions Stack`.
+
+Note that in LispWorks 5.1 a new command `Go Back` was introduced, so the code
+related to the definitions stack is disabled for 5.1 and higher.
+
+"
+  (:|Pop Definitions Stack| command))
+
                              
 #+:editor-does-not-have-go-back
 (defcommand "Pop Definitions Stack" (p)
@@ -359,6 +429,21 @@ described in a help window."
             (dolist (val values)
               (describe val)
               (terpri))))))))
+
+
+(40ants-doc:defsection @quicklisp-integration (:title "Quicklisp integration")
+  "
+
+LW-ADD-ONS contains [Quicklisp](http://www.quicklisp.org/) support.
+
+Download http://beta.quicklisp.org/quicklisp.lisp and load it. Installation
+is self-explanatory, simply follow the instructions. Do not let Quicklisp
+write anything into init files.
+"
+  (:|Quickload Library| command)
+  (:|Quicklisp Update Client| command)
+  (:|Quicklisp Update All Dists| command))
+
 
 #+:quicklisp
 (defcommand "Quickload Library" (p)

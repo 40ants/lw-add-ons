@@ -95,7 +95,13 @@ reasonably documented.
 
   (@symbol-completion section)
   (@args-of-function section)
-  (@apropos-dialog section))
+  (@apropos-dialog section)
+  (@transient-mode section)
+  (@search-and-replace section)
+  (@documentation section)
+  (@asdf-integration section)
+  (@quicklisp-integration section)
+  (@listener-shortcuts section))
 
 
 (40ants-doc/locatives/base::define-locative-type command ()
@@ -126,8 +132,7 @@ reasonably documented.
 
 (defun build-docs ()
   (unless (find-package :docs-builder)
-    (ql:quickload :docs-builder)
-    (ql:quickload :cl-ppcre))
+    (ql:quickload :docs-builder))
   
   (loop with target-dir = (asdf:system-relative-pathname :lw-add-ons "docs/")
         with build-path = (uiop:symbol-call :docs-builder :build

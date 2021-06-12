@@ -47,8 +47,10 @@ argument list.")
 
 (defvar *mop-page* "c:/home/lisp/doc/mop/dictionary.html"
   "A pathname specifier denoting the location of the dictionary
-page from the AMOP HTML version.  The page is available online at
-<http://www.lisp.org/mop/dictionary.html>")
+page from the `AMOP` `HTML` version. The page is available online at
+<http://www.lisp.org/mop/dictionary.html>
+
+**TODO:** A link above does not work anymore. We need to find another source.")
 
 (defvar *completion-match-function* 'compound-prefix-match
   "The function used by **\"Complete Symbol Without Dialog\"** to

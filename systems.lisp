@@ -29,9 +29,30 @@
 
 (in-package :lw-add-ons)
 
+(40ants-doc:defsection @asdf-integration (:title "ASDF integration"
+                                          :ignore-words ("IDE"))
+  "
+![](system_browser.png)
+
+If *TRANSLATE-ASDF-SYSTEMS* is set to a true value then [ASDF](http://www.cliki.net/asdf) system definitions
+are automatically converted to [Common Defsystem](http://www.lispworks.com/documentation/lw50/LWUG/html/lwuser-195.htm)
+definitions whenever you load or compile an ASDF system.
+
+Note that ASDF is a lot more flexible than Common Defsystem and there's no hope to convert every conceivable ASDF system to an equivalent Common Defsystem system. The conversion is mainly intended to enable you to browse ASDF systems from the LispWorks IDE and use editor commands like [`System Search`](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w-66.htm#marker-885260)
+and [`System Query Replace`](http://www.lispworks.com/documentation/lw50/EDUG-W/html/eduser-w-69.htm#marker-885341).
+It seems to work in practice for a lot of open source ASDF systems that can be used with LispWorks.
+
+Note that this has been rendered mostly obsolete due to [a new feature in LispWorks 6.1](http://www.lispworks.com/documentation/lw60/RNIG/html/readme-372.htm) and has been disabled for LispWorks 7.
+
+"
+  (*translate-asdf-systems* variable)
+  (:|Load ASDF System| command)
+  (:|Test ASDF System| command)
+  (:|Compile ASDF System| command))
+
 (defun list-all-systems-known-to-asdf ()
   "Returns a list of all systems ASDF knows already."
-  (loop for name being the hash-keys of asdf::*defined-systems*
+  (loop for name being the hash-keys of asdf/system-registry:*registered-systems*
         collect name))
 
 (defun list-all-systems-in-central-registry ()

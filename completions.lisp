@@ -32,6 +32,55 @@
 
 (in-package :lw-add-ons)
 
+
+(40ants-doc:defsection @symbol-completion (:title "Symbol Completion"
+                                           :ignore-words ("SLIME-COMPLETE-SYMBOL*"))
+  "
+
+Symbol completion is divided into two editor commands. The \"outer\" command is
+`Indent And Complete Symbol` which tries to indent the current line
+and only performs completion if the line hasn't changed. I have bound this command
+to the `TAB` key in my init file, so I can use `TAB` for both indentation and completion.
+(In LispWorks 7.0 the editor command `Indent Selection or Complete Symbol`
+was introduced, so you probably no longer need my workaround.)
+
+The \"inner\" command is `Complete Symbol Without Dialog` which is intended to work
+more or less like SLIME's `SLIME-COMPLETE-SYMBOL*` function, i.e. you can type, e.g., `m-v-b`
+and it'll be expanded to MULTIPLE-VALUE-BIND. If there's more than one possible completion,
+then the command only performs completion up to the longest unambiguous prefix and shows
+a list of (some of) the possible completions in the echo area. There's no GUI dialog popping
+up because I think that's distracting.
+
+`Indent And Complete Symbol` calls `Complete Symbol Without Dialog` on LispWorks
+4.4.x and 5.0.x. In 5.1, however, the new command `Abbreviated Complete Symbol` was introduced
+by LispWorks, so now you can decide which function should be used via the special
+variable *USE-ABBREVIATED-COMPLETE-SYMBOL*.
+
+If it can be determined that you're within a string then `Indent And Complete Symbol`
+tries pathname completion instead. (This is not perfect, though, as it won't work if
+the string contains spaces.)
+
+If the symbol which is completed denotes a function without arguments, `Complete Symbol Without Dialog`
+will automatically add a closing parenthesis. This can be customized through the variable
+*INSERT-RIGHT-PARENTHESIS-IF-NO-ARGS*.
+
+You can customize the behavior of `Complete Symbol Without Dialog` by changing
+the value of the variable *COMPLETION-MATCH-FUNCTION*.
+
+Note that for LispWorks 7.0 the default behavior had to be changed - see here.
+
+"
+  (*completion-match-function* variable)
+  (*use-abbreviated-complete-symbol* variable)
+
+  (:|Indent And Complete Symbol| command)
+  (:|Complete Symbol Without Dialog| command)
+
+  "These two commands are coming with LispWorks >= 7.0:"
+  (:|Indent Selection or Complete Symbol| command)
+  (:|Abbreviated Complete Symbol| command))
+
+
 (defun compound-prefix-match (prefix target)
   "Return true if PREFIX is a compound-prefix of TARGET.
 Viewing each of PREFIX and TARGET as a series of substrings delimited

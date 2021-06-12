@@ -29,10 +29,24 @@
 
 (in-package :lw-add-ons)
 
+(40ants-doc:defsection @args-of-function (:title "Information about the arguments of a function")
+  "
+The editor command `Insert Space and Show Arglist` which I've bound to the space
+key inserts a space and shows the argument list of the nearest enclosing operator
+in the echo area. If *SHOW-DOC-STRING-WHEN-SHOWING-ARGLIST* is true the documentation
+string of the operator is also shown.
+
+Note that this command is different from the one that's distributed as an example
+together with LispWorks.
+"
+  (:|Insert Space and Show Arglist| command)
+  (*show-doc-string-when-showing-arglist* variable))
+
+
 (defcommand "Insert Space And Show Arglist" (p)
-     "Displays arglist of nearest enclosing operator in the echo
+  "Displays arglist of nearest enclosing operator in the echo
 area after inserting a space."
-     "Displays arglist."
+  "Displays arglist."
   (self-insert-command p #\Space)
   (show-arglist))
 

@@ -33,7 +33,7 @@
 (in-package :lw-add-ons)
 
 (defvar *show-doc-string-when-showing-arglist* nil
-  "Whether the editor command \"Insert Space and Show Arglist\"
+  "Whether the editor command `Insert Space and Show Arglist`
 is supposed to show the documentation string as well.")
 
 (defvar *max-completions-to-show* 14
@@ -51,15 +51,15 @@ page from the AMOP HTML version.  The page is available online at
 <http://www.lisp.org/mop/dictionary.html>")
 
 (defvar *completion-match-function* 'compound-prefix-match
-  "The function used by \"Complete Symbol Without Dialog\" to
-check possible completions.  Should be a designator for a
-function of two arguments and return true iff the second argument
-is a possible completion of the first one.")
+  "The function used by **\"Complete Symbol Without Dialog\"** to
+   check possible completions.  Should be a designator for a
+   function of two arguments and return true iff the second argument
+   is a possible completion of the first one.")
 
 (defvar *use-abbreviated-complete-symbol* t
-  "Whether \"Indent And Complete Symbol\" should call \"Abbreviated
-Complete Symbol\" \(only available in LispWorks 5.1 or higher) instead
-of \"Complete Symbol Without Dialog\".")
+  "Whether **\"Indent And Complete Symbol\"** should call
+   **\"Abbreviated Complete Symbol\"** \(only available in LispWorks 5.1 or higher) instead
+   of **\"Complete Symbol Without Dialog\"**.")
 
 (defvar *make-backup-filename-function* nil
   "If the value of this variable is not NIL, then it should be a

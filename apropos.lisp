@@ -29,6 +29,25 @@
 
 (in-package :lw-add-ons)
 
+
+(40ants-doc:defsection @apropos-dialog (:title "Apropos dialog")
+  "
+There is an Apropos dialog (see picture above) that can be reached via
+the LispWorks `Tools` menu or the `Tools Apropos` editor command (bound to `C-c C-a`):
+
+![](apropos.png)
+
+The dialog should be mostly self-explanatory. Note that right-clicking on the results
+in the multi-column list panel (after selecting one or more items) pops up
+a menu with various options similar to other IDE tools. Double-clicking an item tries
+to find the corresponding source code or, failing that, the documentation.
+
+Note that in LispWorks 5.0 a [similar tool](http://www.lispworks.com/documentation/lw50/CLWUG-W/html/clwuser-w-318.htm)
+was introduced and it is bound to `C-c C-a` shortcut.
+"
+  (:|Tools Apropos| command))
+
+
 (defclass apropos-result-panel (capi:multi-column-list-panel)
   ()
   (:documentation "A subclass of CAPI:MULTI-COLUMN-LIST-PANEL which

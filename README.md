@@ -254,7 +254,8 @@ the command [`Set Mark And Highlight`][e6e2] to `C-SPC` and/or `C-@`.
 
 This results in the marked region always being highlighted.
 
-TODO: Check if this command needed in LispWorks 7.1 seems standard `Set Mark` command works well.
+In LispWorks 7.1 standard `Set Mark` command works well in a transient mode
+by default and you don't need to rebind `C-SPC` to [`Set Mark And Highlight`][e6e2].
 
 <a id='x-28-3A-7CSet-20Mark-20And-20Highlight-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
 

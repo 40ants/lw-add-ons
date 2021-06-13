@@ -645,6 +645,17 @@ does."
                                     "!drive_\\1!")
                      "!"))
 
+
+(40ants-doc:defsection @alternative-backups (:title "Alternative editor backups")
+  "
+LW-ADD-ONS can alter the way the IDE editor creates pathnames for backups. This might come in handy if you don't want your code directories to be cluttered with files like `foo.lisp~`. Read about *MAKE-BACKUP-FILENAME-FUNCTION*, MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY, and *BACKUP-DIRECTORY* and set these to values suiting your needs.
+
+"
+  (*make-backup-filename-function* variable)
+  (*backup-directory* variable)
+  (make-backup-filename-using-backup-directory function))
+
+
 (defun make-backup-filename-using-backup-directory (pathname)
   "Creates and returns a backup pathname for PATHNAME.  Assumes that
 *BACKUP-DIRECTORY* denotes a directory.  Note that due to the way the

@@ -165,7 +165,8 @@ function."
 
 (40ants-doc:defsection @documentation (:title "Online documentation"
                                        :ignore-words ("F5"
-                                                      "AMOP"))
+                                                      "AMOP"
+                                                      "MOP"))
   "
 The editor command `Meta Documentation` (bound to F5 in the sample init file)
 tries to find HTML documentation for the symbol at point and immediately

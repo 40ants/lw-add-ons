@@ -66,6 +66,15 @@
 (asdf:defsystem :lw-add-ons
   :version "0.10.3"
   :serial t
+  :author "Edmund Weitz"
+  :maintainer "Alexander Artemenko"
+  :description "A bunch of extensions for LispWorks IDE, originally written by Edmund Weitz."
+  :license "BSD-2-Clause"
+  :homepage "https://40ants.com/lw-add-ons"
+  :bug-tracker "https://github.com/40ants/lw-add-ons/issues"
+  ;; With this piece, documentation builder fails because it
+  ;; is unable to locate code for custom LW commands yet:
+  ;; :source-control (:git "https://github.com/40ants/lw-add-ons")
   :components ((:file "packages")
                (:file "specials")
                (:file "misc")
@@ -78,4 +87,8 @@
                (:file "commands")
                (:file "doc"))
   :depends-on ("lw-doc"
-               "40ants-doc"))
+               "40ants-doc"
+               "40ants-doc/builder/bullet"
+               "40ants-doc/args"
+               "40ants-doc/render/print"
+               "40ants-doc/markdown/transform"))

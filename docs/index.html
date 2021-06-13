@@ -49,7 +49,10 @@
 <li><a href="#x-28LW-ADD-ONS-3A-40ASDF-INTEGRATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="ASDF integration">4.7 ASDF integration</a></li>
 <li><a href="#x-28LW-ADD-ONS-3A-40QUICKLISP-INTEGRATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Quicklisp integration">4.8 Quicklisp integration</a></li>
 <li><a href="#x-28LW-ADD-ONS-3A-40LISTENER-SHORTCUTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Listener shortcuts">4.9 Listener shortcuts</a></li>
+<li><a href="#x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Alternative editor backups">4.10 Alternative editor backups</a></li>
+<li><a href="#x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Miscellaneous">4.11 Miscellaneous</a></li>
 </ul></li>
+<li><a href="#x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Acknowledgements">5 Acknowledgements</a></li>
 </ul>
 
 <h6>[in package LW-ADD-ONS]</h6>
@@ -78,6 +81,12 @@ so you can basically do with it whatever you want.</p>
 
 <ul>
 <li>Version: 0.10.3</li>
+<li>Description: A bunch of extensions for LispWorks IDE, originally written by Edmund Weitz.</li>
+<li>Licence: BSD-2-Clause</li>
+<li>Author: Edmund Weitz</li>
+<li>Maintainer: Alexander Artemenko</li>
+<li>Homepage: <a href="https://40ants.com/lw-add-ons" >https://40ants.com/lw-add-ons</a></li>
+<li>Bug tracker: <a href="https://github.com/40ants/lw-add-ons/issues" >https://github.com/40ants/lw-add-ons/issues</a></li>
 </ul>
 
 <p><a id='x-28LW-ADD-ONS-3A-40COMPATIBILITY-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a></p>
@@ -388,7 +397,7 @@ undocumented LispWorks command <code>Function Documentation</code>.</p>
 
 <p>Finds and displays documentation for the given symbol if it is
 supported by Hyperdoc or can be found in one of the online manuals
-(CLHS, LW, <code>MOP</code>).  If point is on a symbol which is known to have
+(CLHS, LW, MOP).  If point is on a symbol which is known to have
 documentation the page is immediately shown.  Otherwise, or with a
 prefix argument, the user is queried for the symbol.</p></li>
 </ul>
@@ -494,7 +503,7 @@ write anything into init files.</p>
 
 <p><a id='x-28LW-ADD-ONS-3A-40LISTENER-SHORTCUTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a></p>
 
-<p><span class="outer-navigation"><span class="navigation"> <a href="#x-28LW-ADD-ONS-3A-40QUICKLISP-INTEGRATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Quicklisp integration">&#8592;</a> <a href="#x-28LW-ADD-ONS-3A-40OVERVIEW-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Overview">&#8593;</a> <a href="#x-28LW-ADD-ONS-3A-40LISTENER-SHORTCUTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Listener shortcuts">&#8634;</a></span></span></p>
+<p><span class="outer-navigation"><span class="navigation"> <a href="#x-28LW-ADD-ONS-3A-40QUICKLISP-INTEGRATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Quicklisp integration">&#8592;</a> <a href="#x-28LW-ADD-ONS-3A-40OVERVIEW-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Overview">&#8593;</a> <a href="#x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Alternative editor backups">&#8594;</a> <a href="#x-28LW-ADD-ONS-3A-40LISTENER-SHORTCUTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Listener shortcuts">&#8634;</a></span></span></p>
 
 <h3><a href="#x-28LW-ADD-ONS-3A-40LISTENER-SHORTCUTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">4.9 Listener shortcuts</a></h3>
 
@@ -532,7 +541,7 @@ administrative tasks like loading a system via <code>ASDF</code> or changing the
 </ul>
 
 <p>If you don't like this change and want the old behavior while using
-Quicklisp simply switch <a href="#x-28LW-ADD-ONS-3A-2AUSE-QUICKLISP-FOR-SHORTCUT-L-2A-20-28VARIABLE-29-29" title="(LW-ADD-ONS:*USE-QUICKLISP-FOR-SHORTCUT-L* (VARIABLE))"><code>*USE-QUICKLISP-FOR-SHORTCUT-L*</code></a> to <code>NIL.</code></p>
+Quicklisp simply switch <a href="#x-28LW-ADD-ONS-3A-2AUSE-QUICKLISP-FOR-SHORTCUT-L-2A-20-28VARIABLE-29-29" title="(LW-ADD-ONS:*USE-QUICKLISP-FOR-SHORTCUT-L* (VARIABLE))"><code>*USE-QUICKLISP-FOR-SHORTCUT-L*</code></a> to <code>NIL</code>.</p>
 
 <p><a id='x-28-3A-7CMaybe-20Invoke-20Listener-20Shortcut-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
 
@@ -594,6 +603,151 @@ preceded by a shortcut.</p></li>
 
 <p>Whether listener shortcuts should prefer Quicklisp.</p></li>
 </ul>
+
+<p><a id='x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a></p>
+
+<p><span class="outer-navigation"><span class="navigation"> <a href="#x-28LW-ADD-ONS-3A-40LISTENER-SHORTCUTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Listener shortcuts">&#8592;</a> <a href="#x-28LW-ADD-ONS-3A-40OVERVIEW-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Overview">&#8593;</a> <a href="#x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Miscellaneous">&#8594;</a> <a href="#x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Alternative editor backups">&#8634;</a></span></span></p>
+
+<h3><a href="#x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">4.10 Alternative editor backups</a></h3>
+
+<p><a href="#x-28-22lw-add-ons-22-20ASDF-2FSYSTEM-3ASYSTEM-29" title="(\&quot;lw-add-ons\&quot; ASDF/SYSTEM:SYSTEM)"><code>LW-ADD-ONS</code></a> can alter the way the IDE editor creates pathnames for backups. This might come in handy if you don't want your code directories to be cluttered with files like <code>foo.lisp~</code>. Read about <a href="#x-28LW-ADD-ONS-3A-2AMAKE-BACKUP-FILENAME-FUNCTION-2A-20-28VARIABLE-29-29" title="(LW-ADD-ONS:*MAKE-BACKUP-FILENAME-FUNCTION* (VARIABLE))"><code>*MAKE-BACKUP-FILENAME-FUNCTION*</code></a>, <a href="#x-28LW-ADD-ONS-3AMAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY-20FUNCTION-29" title="(LW-ADD-ONS:MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY FUNCTION)"><code>MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY</code></a>, and <a href="#x-28LW-ADD-ONS-3A-2ABACKUP-DIRECTORY-2A-20-28VARIABLE-29-29" title="(LW-ADD-ONS:*BACKUP-DIRECTORY* (VARIABLE))"><code>*BACKUP-DIRECTORY*</code></a> and set these to values suiting your needs.</p>
+
+<p><a id='x-28LW-ADD-ONS-3A-2AMAKE-BACKUP-FILENAME-FUNCTION-2A-20-28VARIABLE-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[variable]</span> <span class="reference-object"><a href="#x-28LW-ADD-ONS-3A-2AMAKE-BACKUP-FILENAME-FUNCTION-2A-20-28VARIABLE-29-29" >*MAKE-BACKUP-FILENAME-FUNCTION*</a></span></span> <span class="locative-args">MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY</span></span></p>
+
+<p>If the value of this variable is not <code>NIL</code>, then it should be a
+designator for a function of one argument which accepts a pathname and
+returns a pathname.  LispWork's own <code>EDITOR::MAKE-BACKUP-FILENAME</code>
+function will be replaced with this one in this case.</p></li>
+</ul>
+
+<p><a id='x-28LW-ADD-ONS-3A-2ABACKUP-DIRECTORY-2A-20-28VARIABLE-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[variable]</span> <span class="reference-object"><a href="#x-28LW-ADD-ONS-3A-2ABACKUP-DIRECTORY-2A-20-28VARIABLE-29-29" >*BACKUP-DIRECTORY*</a></span></span> <span class="locative-args">#P&quot;/Users/art/Library/Application Support/LW-ADD-ONS/Backups/&quot;</span></span></p>
+
+<p>The directory where backups are stored if the value of
+<a href="#x-28LW-ADD-ONS-3A-2AMAKE-BACKUP-FILENAME-FUNCTION-2A-20-28VARIABLE-29-29" title="(LW-ADD-ONS:*MAKE-BACKUP-FILENAME-FUNCTION* (VARIABLE))"><code>*MAKE-BACKUP-FILENAME-FUNCTION*</code></a> denotes the function
+'<a href="#x-28LW-ADD-ONS-3AMAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY-20FUNCTION-29" title="(LW-ADD-ONS:MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY FUNCTION)"><code>MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY</code></a>.  It is recommended that
+you dont't use this directory for other purposes.</p></li>
+</ul>
+
+<p><a id='x-28LW-ADD-ONS-3AMAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY-20FUNCTION-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[function]</span> <span class="reference-object"><a href="#x-28LW-ADD-ONS-3AMAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY-20FUNCTION-29" >MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY</a></span></span> <span class="locative-args">PATHNAME</span></span></p>
+
+<p>Creates and returns a backup pathname for <code>PATHNAME</code>.  Assumes that
+<a href="#x-28LW-ADD-ONS-3A-2ABACKUP-DIRECTORY-2A-20-28VARIABLE-29-29" title="(LW-ADD-ONS:*BACKUP-DIRECTORY* (VARIABLE))"><code>*BACKUP-DIRECTORY*</code></a> denotes a directory.  Note that due to the way the
+backup pathname is constructed it is possible that two different files
+end up with the same backup filename!</p></li>
+</ul>
+
+<p><a id='x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a></p>
+
+<p><span class="outer-navigation"><span class="navigation"> <a href="#x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Alternative editor backups">&#8592;</a> <a href="#x-28LW-ADD-ONS-3A-40OVERVIEW-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Overview">&#8593;</a> <a href="#x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Acknowledgements">&#8594;</a> <a href="#x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Miscellaneous">&#8634;</a></span></span></p>
+
+<h3><a href="#x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">4.11 Miscellaneous</a></h3>
+
+<p>The command <a href="#x-28-3A-7CNext-20Ordinary-20Window-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Next Ordinary Window| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Next Ordinary Window</code></a> (usually bound to <code>C-x o</code>) is modified to also allow switching from an editor window to a listener window.</p>
+
+<p><a id='x-28-3A-7CNext-20Ordinary-20Window-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CNext-20Ordinary-20Window-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Next Ordinary Window</a></span></span></span></p>
+
+<p>Change the current window to be the next ordinary editor window and the current buffer to be its buffer.</p></li>
+</ul>
+
+<p>The command <a href="#x-28-3A-7CFind-20Alternate-20File-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Find Alternate File| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Find Alternate File</code></a> (usually bound to <code>C-x C-v</code>) is modified such that it checks whether the contents of the buffer are consistent with the file on disk. Also, it'll provide the full pathname of the current buffer as the default when prompting.</p>
+
+<p><a id='x-28-3A-7CFind-20Alternate-20File-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CFind-20Alternate-20File-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Find Alternate File</a></span></span></span></p>
+
+<p>Replaces the contents of the current buffer with the text in the file which is prompted for.  The prefix argument is, of course, ignored p times.</p></li>
+</ul>
+
+<p>The command <a href="#x-28-3A-7CIndent-20And-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Indent And Complete Symbol| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Indent And Complete Symbol</code></a> includes a workaround to make sure that the start of a top-level form will always be indented to the beginning of a line. LispWorks usually doesn't do that.</p>
+
+<p><a id='x-28-3A-7CIndent-20And-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CIndent-20And-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Indent And Complete Symbol</a></span></span></span></p>
+
+<p>Indents the current line and performs symbol completion.
+First indents the line.  If indenting doesn't change the line
+point is in, completes the symbol.  If there's no symbol at the
+point, shows the arglist for the most recently enclosed macro or
+function.</p></li>
+</ul>
+
+<p>The commands <a href="#x-28-3A-7CEvaluate-20Last-20Form-20And-20Inspect-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Evaluate Last Form And Inspect| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Evaluate Last Form And Inspect</code></a> (<code>C-c i</code>) and <a href="#x-28-3A-7CEvaluate-20Last-20Form-20And-20Describe-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Evaluate Last Form And Describe| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Evaluate Last Form And Describe</code></a> (<code>C-c d</code>) are like <code>Evaluate Last Form</code> but open the result in an IDE inspector or describe it in a help window respectively.</p>
+
+<p><a id='x-28-3A-7CEvaluate-20Last-20Form-20And-20Inspect-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CEvaluate-20Last-20Form-20And-20Inspect-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Evaluate Last Form And Inspect</a></span></span></span></p>
+
+<p>Evaluates Lisp form before the current point.  The result
+is inspected in an IDE Inspector.</p></li>
+</ul>
+
+<p><a id='x-28-3A-7CEvaluate-20Last-20Form-20And-20Describe-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CEvaluate-20Last-20Form-20And-20Describe-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Evaluate Last Form And Describe</a></span></span></span></p>
+
+<p>Evaluates Lisp form before the current point.  The result is
+described in a help window.</p></li>
+</ul>
+
+<p>The command <a href="#x-28-3A-7CUntrace-20All-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Untrace All| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Untrace All</code></a> executes <code>(untrace)</code>, the command <a href="#x-28-3A-7CToggle-20Trace-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" title="(:|Toggle Trace| (40ANTS-DOC/LOCATIVES::COMMAND))"><code>Toggle Trace</code></a> (<code>C-c C-t</code>) traces or untraces a function depending on its current state.</p>
+
+<p><a id='x-28-3A-7CUntrace-20All-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CUntrace-20All-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Untrace All</a></span></span></span></p>
+
+<p>Untraces all traced definitions.</p></li>
+</ul>
+
+<p><a id='x-28-3A-7CToggle-20Trace-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a></p>
+
+<ul>
+<li><p><span class=reference-bullet><span class=reference><span class="locative-type">[command]</span> <span class="reference-object"><a href="#x-28-3A-7CToggle-20Trace-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29" >Toggle Trace</a></span></span></span></p>
+
+<p>Toggles Trace.</p></li>
+</ul>
+
+<p>The included initialization file makes sure you start with an editor
+and (if you use the <code>MDI</code> interface) tiles the windows vertically.</p>
+
+<p>A DDE Server <a href="http://www.lispworks.com/kb/55af67dc408cab568025687f004b1442.html" >as described in the LispWorks Knowledgebase</a>
+is set up so you can open Lisp source files by double-clicking them.
+You have to configure Windows Explorer to use this facility, of course.</p>
+
+<p>The function keys <code>F11</code> and <code>F12</code> are bound to commands that switch to an editor
+or a listener respectively (and create these tools if necessary).</p>
+
+<p><a id='x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a></p>
+
+<p><span class="outer-navigation"><span class="navigation"> <a href="#x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Miscellaneous">&#8592;</a> <a href="#x-28LW-ADD-ONS-3A-40INDEX-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="LW-ADD-ONS">&#8593;</a> <a href="#x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29" title="Acknowledgements">&#8634;</a></span></span></p>
+
+<h2><a href="#x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29">5 Acknowledgements</a></h2>
+
+<p>The inhabitants of the LispWorks mailing list are an invaluable source of
+information when one writes LispWorks-specific code.
+Specifically, Jeff Caldwell, Bill Clementson, John DeSoi, Dmitriy Ivanov,
+Arthur Lemmens, Nick Levine, Sean Ross, Jens Teich, Barry Wilkes,
+and (from LispWorks Ltd.) Dave Fox and Martin Simmons have been very helpful
+in various ways.</p>
+
+<p>Thanks also go to the cool <a href="http://common-lisp.net/project/slime" >SLIME</a>
+project which provided inspiration and code to steal.</p>
   </div>
 </div>
 <script>$('#page-toc').toc({'selectors': 'h1,h2,h3,h4'});</script>

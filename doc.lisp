@@ -30,7 +30,8 @@ so you can basically do with it whatever you want.
   (lw-add-ons system)
   (@compatibility section)
   (@installation section)
-  (@overview section))
+  (@overview section)
+  (@acknowledgements section))
 
 
 (40ants-doc:defsection @compatibility (:title "Compatibility with different LispWorks releases")
@@ -101,7 +102,54 @@ reasonably documented.
   (@documentation section)
   (@asdf-integration section)
   (@quicklisp-integration section)
-  (@listener-shortcuts section))
+  (@listener-shortcuts section)
+  (@alternative-backups section)
+  (@misc section))
+
+
+(40ants-doc:defsection @misc (:title "Miscellaneous"
+                              :ignore-words ("DDE"))
+  "The command `Next Ordinary Window` (usually bound to `C-x o`) is modified to also allow switching from an editor window to a listener window."
+  (:|Next Ordinary Window| command)
+
+  "The command `Find Alternate File` (usually bound to `C-x C-v`) is modified such that it checks whether the contents of the buffer are consistent with the file on disk. Also, it'll provide the full pathname of the current buffer as the default when prompting."
+  (:|Find Alternate File| command)
+
+  "The command `Indent And Complete Symbol` includes a workaround to make sure that the start of a top-level form will always be indented to the beginning of a line. LispWorks usually doesn't do that."
+  (:|Indent And Complete Symbol| command)
+
+  "The commands `Evaluate Last Form And Inspect` (`C-c i`) and `Evaluate Last Form And Describe` (`C-c d`) are like `Evaluate Last Form` but open the result in an IDE inspector or describe it in a help window respectively."
+  (:|Evaluate Last Form And Inspect| command)
+  (:|Evaluate Last Form And Describe| command)
+
+  "The command `Untrace All` executes `(untrace)`, the command `Toggle Trace` (`C-c C-t`) traces or untraces a function depending on its current state."
+  (:|Untrace All| command)
+  (:|Toggle Trace| command)
+  
+  "
+The included initialization file makes sure you start with an editor
+and (if you use the MDI interface) tiles the windows vertically.
+
+A DDE Server [as described in the LispWorks Knowledgebase](http://www.lispworks.com/kb/55af67dc408cab568025687f004b1442.html)
+is set up so you can open Lisp source files by double-clicking them.
+You have to configure Windows Explorer to use this facility, of course.
+
+The function keys `F11` and `F12` are bound to commands that switch to an editor
+or a listener respectively (and create these tools if necessary).
+")
+
+
+(40ants-doc:defsection @acknowledgements (:title "Acknowledgements")
+  "The inhabitants of the LispWorks mailing list are an invaluable source of
+   information when one writes LispWorks-specific code.
+   Specifically, Jeff Caldwell, Bill Clementson, John DeSoi, Dmitriy Ivanov,
+   Arthur Lemmens, Nick Levine, Sean Ross, Jens Teich, Barry Wilkes,
+   and (from LispWorks Ltd.) Dave Fox and Martin Simmons have been very helpful
+   in various ways.
+
+   Thanks also go to the cool [SLIME](http://common-lisp.net/project/slime)
+   project which provided inspiration and code to steal.
+")
 
 
 (40ants-doc/locatives/base::define-locative-type command ()

@@ -17,6 +17,9 @@
     - [4.7 ASDF integration][6d71]
     - [4.8 Quicklisp integration][6128]
     - [4.9 Listener shortcuts][658f]
+    - [4.10 Alternative editor backups][0531]
+    - [4.11 Miscellaneous][cf36]
+- [5 Acknowledgements][b7eb]
 
 ###### \[in package LW-ADD-ONS\]
 [`LW-ADD-ONS`][090a] is a collection of small "enhancements" to
@@ -42,6 +45,12 @@ so you can basically do with it whatever you want.
 ## 1 LW-ADD-ONS ASDF System Details
 
 - Version: 0.10.3
+- Description: A bunch of extensions for LispWorks IDE, originally written by Edmund Weitz.
+- Licence: BSD-2-Clause
+- Author: Edmund Weitz
+- Maintainer: Alexander Artemenko
+- Homepage: [https://40ants.com/lw-add-ons](https://40ants.com/lw-add-ons)
+- Bug tracker: [https://github.com/40ants/lw-add-ons/issues](https://github.com/40ants/lw-add-ons/issues)
 
 
 <a id='x-28LW-ADD-ONS-3A-40COMPATIBILITY-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
@@ -311,7 +320,7 @@ undocumented LispWorks command `Function Documentation`.
 
     Finds and displays documentation for the given symbol if it is
     supported by Hyperdoc or can be found in one of the online manuals
-    (CLHS, LW, `MOP`).  If point is on a symbol which is known to have
+    (CLHS, LW, MOP).  If point is on a symbol which is known to have
     documentation the page is immediately shown.  Otherwise, or with a
     prefix argument, the user is queried for the symbol.
 
@@ -432,7 +441,7 @@ and loading with `ASDF` is changed to:
 - [`Load ASDF System`][6804] (a),
 
 If you don't like this change and want the old behavior while using
-Quicklisp simply switch [`*USE-QUICKLISP-FOR-SHORTCUT-L*`][0235] to `NIL.`
+Quicklisp simply switch [`*USE-QUICKLISP-FOR-SHORTCUT-L*`][0235] to `NIL`.
 
 <a id='x-28-3A-7CMaybe-20Invoke-20Listener-20Shortcut-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
 
@@ -481,20 +490,144 @@ Quicklisp simply switch [`*USE-QUICKLISP-FOR-SHORTCUT-L*`][0235] to `NIL.`
 
     Whether listener shortcuts should prefer Quicklisp.
 
+<a id='x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+
+### 4.10 Alternative editor backups
+
+[`LW-ADD-ONS`][090a] can alter the way the IDE editor creates pathnames for backups. This might come in handy if you don't want your code directories to be cluttered with files like `foo.lisp~`. Read about [`*MAKE-BACKUP-FILENAME-FUNCTION*`][2822], [`MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY`][482e], and [`*BACKUP-DIRECTORY*`][e6b1] and set these to values suiting your needs.
+
+<a id='x-28LW-ADD-ONS-3A-2AMAKE-BACKUP-FILENAME-FUNCTION-2A-20-28VARIABLE-29-29'></a>
+
+- [variable] **\*MAKE-BACKUP-FILENAME-FUNCTION\*** *MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY*
+
+    If the value of this variable is not `NIL`, then it should be a
+    designator for a function of one argument which accepts a pathname and
+    returns a pathname.  LispWork's own `EDITOR::MAKE-BACKUP-FILENAME`
+    function will be replaced with this one in this case.
+
+<a id='x-28LW-ADD-ONS-3A-2ABACKUP-DIRECTORY-2A-20-28VARIABLE-29-29'></a>
+
+- [variable] **\*BACKUP-DIRECTORY\*** *#P"/Users/art/Library/Application Support/LW-ADD-ONS/Backups/"*
+
+    The directory where backups are stored if the value of
+    [`*MAKE-BACKUP-FILENAME-FUNCTION*`][2822] denotes the function
+    '[`MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY`][482e].  It is recommended that
+    you dont't use this directory for other purposes.
+
+<a id='x-28LW-ADD-ONS-3AMAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY-20FUNCTION-29'></a>
+
+- [function] **MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY** *PATHNAME*
+
+    Creates and returns a backup pathname for `PATHNAME`.  Assumes that
+    [`*BACKUP-DIRECTORY*`][e6b1] denotes a directory.  Note that due to the way the
+    backup pathname is constructed it is possible that two different files
+    end up with the same backup filename!
+
+<a id='x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+
+### 4.11 Miscellaneous
+
+The command [`Next Ordinary Window`][1abc] (usually bound to `C-x o`) is modified to also allow switching from an editor window to a listener window.
+
+<a id='x-28-3A-7CNext-20Ordinary-20Window-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Next Ordinary Window**
+
+    Change the current window to be the next ordinary editor window and the current buffer to be its buffer.
+
+The command [`Find Alternate File`][749c] (usually bound to `C-x C-v`) is modified such that it checks whether the contents of the buffer are consistent with the file on disk. Also, it'll provide the full pathname of the current buffer as the default when prompting.
+
+<a id='x-28-3A-7CFind-20Alternate-20File-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Find Alternate File**
+
+    Replaces the contents of the current buffer with the text in the file which is prompted for.  The prefix argument is, of course, ignored p times.
+
+The command [`Indent And Complete Symbol`][792b] includes a workaround to make sure that the start of a top-level form will always be indented to the beginning of a line. LispWorks usually doesn't do that.
+
+<a id='x-28-3A-7CIndent-20And-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Indent And Complete Symbol**
+
+    Indents the current line and performs symbol completion.
+    First indents the line.  If indenting doesn't change the line
+    point is in, completes the symbol.  If there's no symbol at the
+    point, shows the arglist for the most recently enclosed macro or
+    function.
+
+The commands [`Evaluate Last Form And Inspect`][d5c5] (`C-c i`) and [`Evaluate Last Form And Describe`][e602] (`C-c d`) are like `Evaluate Last Form` but open the result in an IDE inspector or describe it in a help window respectively.
+
+<a id='x-28-3A-7CEvaluate-20Last-20Form-20And-20Inspect-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Evaluate Last Form And Inspect**
+
+    Evaluates Lisp form before the current point.  The result
+    is inspected in an IDE Inspector.
+
+<a id='x-28-3A-7CEvaluate-20Last-20Form-20And-20Describe-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Evaluate Last Form And Describe**
+
+    Evaluates Lisp form before the current point.  The result is
+    described in a help window.
+
+The command [`Untrace All`][2b3a] executes `(untrace)`, the command [`Toggle Trace`][816a] (`C-c C-t`) traces or untraces a function depending on its current state.
+
+<a id='x-28-3A-7CUntrace-20All-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Untrace All**
+
+    Untraces all traced definitions.
+
+<a id='x-28-3A-7CToggle-20Trace-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29'></a>
+
+- [command] **Toggle Trace**
+
+    Toggles Trace.
+
+The included initialization file makes sure you start with an editor
+and (if you use the `MDI` interface) tiles the windows vertically.
+
+A DDE Server [as described in the LispWorks Knowledgebase](http://www.lispworks.com/kb/55af67dc408cab568025687f004b1442.html)
+is set up so you can open Lisp source files by double-clicking them.
+You have to configure Windows Explorer to use this facility, of course.
+
+The function keys `F11` and `F12` are bound to commands that switch to an editor
+or a listener respectively (and create these tools if necessary).
+
+<a id='x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29'></a>
+
+## 5 Acknowledgements
+
+The inhabitants of the LispWorks mailing list are an invaluable source of
+information when one writes LispWorks-specific code.
+Specifically, Jeff Caldwell, Bill Clementson, John DeSoi, Dmitriy Ivanov,
+Arthur Lemmens, Nick Levine, Sean Ross, Jens Teich, Barry Wilkes,
+and (from LispWorks Ltd.) Dave Fox and Martin Simmons have been very helpful
+in various ways.
+
+Thanks also go to the cool [SLIME](http://common-lisp.net/project/slime)
+project which provided inspiration and code to steal.
+
   [0235]: #x-28LW-ADD-ONS-3A-2AUSE-QUICKLISP-FOR-SHORTCUT-L-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*USE-QUICKLISP-FOR-SHORTCUT-L* (VARIABLE))"
   [032c]: #x-28-3A-7CShow-20Directory-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Show Directory| (40ANTS-DOC/LOCATIVES::COMMAND))"
+  [0531]: #x-28LW-ADD-ONS-3A-40ALTERNATIVE-BACKUPS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Alternative editor backups"
   [076f]: #x-28LW-ADD-ONS-3A-40INSTALLATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Installation"
   [090a]: #x-28-22lw-add-ons-22-20ASDF-2FSYSTEM-3ASYSTEM-29 "(\"lw-add-ons\" ASDF/SYSTEM:SYSTEM)"
   [0dd5]: #x-28LW-ADD-ONS-3A-40TRANSIENT-MODE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Transient mark mode"
   [153f]: #x-28-3A-7CQuickload-20Library-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Quickload Library| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [1568]: #x-28-3A-7CComplete-20Symbol-20Without-20Dialog-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Complete Symbol Without Dialog| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [1a2c]: #x-28-3A-7CTest-20ASDF-20System-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Test ASDF System| (40ANTS-DOC/LOCATIVES::COMMAND))"
+  [1abc]: #x-28-3A-7CNext-20Ordinary-20Window-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Next Ordinary Window| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [1bba]: #x-28LW-ADD-ONS-3A-40SYMBOL-COMPLETION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Symbol Completion"
+  [2822]: #x-28LW-ADD-ONS-3A-2AMAKE-BACKUP-FILENAME-FUNCTION-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*MAKE-BACKUP-FILENAME-FUNCTION* (VARIABLE))"
+  [2b3a]: #x-28-3A-7CUntrace-20All-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Untrace All| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [3487]: #x-28-3A-7CTools-20Apropos-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Tools Apropos| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [37d2]: #x-28LW-ADD-ONS-3A-40APROPOS-DIALOG-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Apropos dialog"
   [390b]: #x-28-3A-7CIndent-20Selection-20or-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Indent Selection or Complete Symbol| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [3f0d]: #x-28LW-ADD-ONS-3A-40SEARCH-AND-REPLACE-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Search and replace"
   [46b7]: #x-28-3A-7CChange-20Package-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Change Package| (40ANTS-DOC/LOCATIVES::COMMAND))"
+  [482e]: #x-28LW-ADD-ONS-3AMAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY-20FUNCTION-29 "(LW-ADD-ONS:MAKE-BACKUP-FILENAME-USING-BACKUP-DIRECTORY FUNCTION)"
   [4f97]: #x-28LW-ADD-ONS-3A-2AMOP-PAGE-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*MOP-PAGE* (VARIABLE))"
   [547a]: #x-28LW-ADD-ONS-3A-2ALISTENER-SHORTCUTS-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*LISTENER-SHORTCUTS* (VARIABLE))"
   [5d5a]: #x-28-3A-7CAbbreviated-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Abbreviated Complete Symbol| (40ANTS-DOC/LOCATIVES::COMMAND))"
@@ -505,14 +638,21 @@ Quicklisp simply switch [`*USE-QUICKLISP-FOR-SHORTCUT-L*`][0235] to `NIL.`
   [6804]: #x-28-3A-7CLoad-20ASDF-20System-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Load ASDF System| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [6d71]: #x-28LW-ADD-ONS-3A-40ASDF-INTEGRATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "ASDF integration"
   [70c3]: #x-28-3A-7CMeta-20Documentation-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Meta Documentation| (40ANTS-DOC/LOCATIVES::COMMAND))"
+  [749c]: #x-28-3A-7CFind-20Alternate-20File-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Find Alternate File| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [792b]: #x-28-3A-7CIndent-20And-20Complete-20Symbol-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Indent And Complete Symbol| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [8013]: #x-28-3A-7CPop-20Definitions-20Stack-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Pop Definitions Stack| (40ANTS-DOC/LOCATIVES::COMMAND))"
+  [816a]: #x-28-3A-7CToggle-20Trace-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Toggle Trace| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [8f10]: #x-28LW-ADD-ONS-3A-40OVERVIEW-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Overview"
   [9aef]: #x-28LW-ADD-ONS-3A-2AUSE-ABBREVIATED-COMPLETE-SYMBOL-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*USE-ABBREVIATED-COMPLETE-SYMBOL* (VARIABLE))"
   [a3e9]: #x-28-3A-7CInsert-20Space-20and-20Show-20Arglist-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Insert Space and Show Arglist| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [a748]: #x-28LW-ADD-ONS-3A-40COMPATIBILITY-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Compatibility with different LispWorks releases"
+  [b7eb]: #x-28LW-ADD-ONS-3A-40ACKNOWLEDGEMENTS-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Acknowledgements"
   [c683]: #x-28LW-ADD-ONS-3A-2ACOMPLETION-MATCH-FUNCTION-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*COMPLETION-MATCH-FUNCTION* (VARIABLE))"
+  [cf36]: #x-28LW-ADD-ONS-3A-40MISC-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Miscellaneous"
+  [d5c5]: #x-28-3A-7CEvaluate-20Last-20Form-20And-20Inspect-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Evaluate Last Form And Inspect| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [dfd0]: #x-28LW-ADD-ONS-3A-40DOCUMENTATION-2040ANTS-DOC-2FLOCATIVES-3ASECTION-29 "Online documentation"
+  [e602]: #x-28-3A-7CEvaluate-20Last-20Form-20And-20Describe-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Evaluate Last Form And Describe| (40ANTS-DOC/LOCATIVES::COMMAND))"
+  [e6b1]: #x-28LW-ADD-ONS-3A-2ABACKUP-DIRECTORY-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*BACKUP-DIRECTORY* (VARIABLE))"
   [e6e2]: #x-28-3A-7CSet-20Mark-20And-20Highlight-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Set Mark And Highlight| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [f422]: #x-28-3A-7CChange-20Directory-7C-20-2840ANTS-DOC-2FLOCATIVES-3A-3ACOMMAND-29-29 "(:|Change Directory| (40ANTS-DOC/LOCATIVES::COMMAND))"
   [f684]: #x-28LW-ADD-ONS-3A-2ASHOW-DOC-STRING-WHEN-SHOWING-ARGLIST-2A-20-28VARIABLE-29-29 "(LW-ADD-ONS:*SHOW-DOC-STRING-WHEN-SHOWING-ARGLIST* (VARIABLE))"

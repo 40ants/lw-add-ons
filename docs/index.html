@@ -125,11 +125,11 @@ LispWorks:</p>
 with <a href="https://ultralisp.org/dists/lispworks" >LispWorks distribution</a>.</p>
 
 <p>If you already have a LispWorks init file, append the included file
-<code>.lispworks' to it, otherwise instruct LispWorks to use this file as
+<code>.lispworks</code> to it, otherwise instruct LispWorks to use this file as
 your initialization file.  In that file, modify the special variables
-</code><em>ASDF-BASE-DIRS</em><code>, and</code><em>WORKING-DIR</em><code>to fit your local settings.
-Specifically, make sure that LW-ADD-ONS, LW-DOC and their supporting
-libraries can be found via</code><em>ASDF-BASE-DIRS</em>`.</p>
+<code>*ASDF-BASE-DIRS*</code>, and <code>*WORKING-DIR*</code> to fit your local settings.
+Specifically, make sure that <a href="#x-28-22lw-add-ons-22-20ASDF-2FSYSTEM-3ASYSTEM-29" title="(\&quot;lw-add-ons\&quot; ASDF/SYSTEM:SYSTEM)"><code>LW-ADD-ONS</code></a>, <code>LW-DOC</code> and their supporting
+libraries can be found via <code>*ASDF-BASE-DIRS*</code>.</p>
 
 <p>Download the <code>HTML</code> page <a href="http://www.lisp.org/mop/dictionary.html">http://www.lisp.org/mop/dictionary.html</a> and
 store it locally.  At the end of the init file (after <a href="#x-28-22lw-add-ons-22-20ASDF-2FSYSTEM-3ASYSTEM-29" title="(\&quot;lw-add-ons\&quot; ASDF/SYSTEM:SYSTEM)"><code>LW-ADD-ONS</code></a> has

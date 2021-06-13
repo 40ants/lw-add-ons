@@ -85,11 +85,11 @@ Use of [Quicklisp](http://www.quicklisp.org) is recommended together
 with [LispWorks distribution](https://ultralisp.org/dists/lispworks).
 
 If you already have a LispWorks init file, append the included file
-`.lispworks' to it, otherwise instruct LispWorks to use this file as
+`.lispworks` to it, otherwise instruct LispWorks to use this file as
 your initialization file.  In that file, modify the special variables
-`*ASDF-BASE-DIRS*`, and`*WORKING-DIR*`to fit your local settings.
-Specifically, make sure that LW-ADD-ONS, LW-DOC and their supporting
-libraries can be found via`*ASDF-BASE-DIRS*\`.
+`*ASDF-BASE-DIRS*`, and `*WORKING-DIR*` to fit your local settings.
+Specifically, make sure that [`LW-ADD-ONS`][090a], `LW-DOC` and their supporting
+libraries can be found via `*ASDF-BASE-DIRS*`.
 
 Download the `HTML` page <http://www.lisp.org/mop/dictionary.html> and
 store it locally.  At the end of the init file (after [`LW-ADD-ONS`][090a] has

@@ -57,7 +57,8 @@
 
 (pushnew :lw-add-ons *features*)
 
-#-:lispworks7
+#-(or :lispworks7
+      :lispworks8)
 (require "hqn-web")
 
 #+(and :win32 (not :console-image))

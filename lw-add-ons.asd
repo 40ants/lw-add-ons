@@ -57,8 +57,8 @@
 
 (pushnew :lw-add-ons *features*)
 
-#-(or :lispworks7
-      :lispworks8)
+#+(or :lispworks5
+      :lispworks6)
 (require "hqn-web")
 
 #+(and :win32 (not :console-image))
@@ -86,10 +86,12 @@
                (:file "systems")
                (:file "editor")
                (:file "commands")
-               (:file "doc"))
+               ;; (:file "doc")
+)
   :depends-on ("lw-doc"
-               "40ants-doc"
-               "40ants-doc/builder/bullet"
-               "40ants-doc/args"
-               "40ants-doc/render/print"
-               "40ants-doc/markdown/transform"))
+               ;; "40ants-doc"
+               ;; "40ants-doc/builder/bullet"
+               ;; "40ants-doc/args"
+               ;; "40ants-doc/render/print"
+               ;; "40ants-doc/markdown/transform"
+))

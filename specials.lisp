@@ -45,12 +45,10 @@ area by \"Complete Symbol Without Dialog.\"")
 right parenthesis if the function is known to have an empty
 argument list.")
 
-(defvar *mop-page* "c:/home/lisp/doc/mop/dictionary.html"
-  "A pathname specifier denoting the location of the dictionary
+(defvar *mop-page* "http://mop.lisp.se/www.alu.org/mop/dictionary.html"
+  "A URL or pathname specifier denoting the location of the dictionary
 page from the `AMOP` `HTML` version. The page is available online at
-<http://www.lisp.org/mop/dictionary.html>
-
-**TODO:** A link above does not work anymore. We need to find another source.")
+<http://mop.lisp.se/www.alu.org/mop/dictionary.html>")
 
 (defvar *completion-match-function* 'compound-prefix-match
   "The function used by **\"Complete Symbol Without Dialog\"** to

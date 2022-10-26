@@ -95,7 +95,8 @@ using functionality from the LW-DOC module."
 
 (defun collect-mop-links ()
   "Adds MOP entries as defined by the fragments in *MOP-LINKS*."
-  (let ((mop-url (make-file-url *mop-page*)))
+  (let ((mop-url (or (and (search "http" *mop-page* :test 'equalp) *mop-page*)
+                     (make-file-url *mop-page*))))
     (loop for (entry link) in *mop-links*
           do (add-doc-entry entry (format nil "~A~A" mop-url link)))))
 

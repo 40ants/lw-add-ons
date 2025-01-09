@@ -36,8 +36,10 @@ directory, optionally appending the string RELATIVE-PATH."
                (format nil
                        #+(or :lispworks6.1 :lispworks7)
                        "manual/online/~A"
-                       #+:lispworks8
+                       #+(and :lispworks8 :win32)
                        "manual/html-w/~A"
+                       #+(and :lispworks8 :linux)
+                       "manual/html-l/~A"
                        #-(or :lispworks6.1 :lispworks7 :lispworks8)
                        "manual/online/web/~A"
                        (or relative-path "")))))
